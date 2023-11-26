@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Video from "../components/Video";
+import { useState, useEffect } from 'react';
 
 const Videos = () => {
   const videoId1 = 'C7DEi8lsnM4';
@@ -22,32 +23,65 @@ const Videos = () => {
   const videoId18 = 'gYb8JZ-fZdQ';
   const videoId19 = 'aAIFLm889FA';
   const videoId20 = 'WEE_Zg85kwU';
-  // Implement the account creation form
+  const videosArray = [videoId1, videoId2, videoId3, videoId4, videoId5, videoId6, videoId7, videoId8, 
+    videoId9, videoId10, videoId11, videoId12, videoId13, videoId14, videoId15, videoId16, 
+    videoId17, videoId18, videoId19, videoId20, ]
+
+  const [videoIds, setVideoIds] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const totalVideos = 20; // Replace with the total number of videos you have
+
+  // Simulate fetching initial video IDs
+  useEffect(() => {
+    // Replace this with your actual logic to fetch initial video IDs
+    const initialVideoIds = [videoId1, videoId2];
+    setVideoIds(initialVideoIds);
+    setLoading(false);
+  }, []);
+
+  // Simulate fetching more video IDs when reaching the bottom of the page
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+        if (!loading) {
+          setLoading(true);
+          setTimeout(() => {
+            // Replace this with your actual logic to fetch more video IDs
+            const currentVideoCount = videoIds.length;
+            const remainingVideos = totalVideos - currentVideoCount;
+
+            if (remainingVideos > 0) {
+              const moreVideoIds = Array.from(
+                { length: Math.min(remainingVideos, 2) }, // Fetch up to 3 videos at a time
+                (_, index) => videosArray[currentVideoCount + index]
+              );
+              setVideoIds((prevIds) => [...prevIds, ...moreVideoIds]);
+            }
+
+            setLoading(false);
+          }, 1000); // Simulating an asynchronous request delay
+        }
+      }
+    };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }); // Include videoIds in the dependency array to prevent potential issues
+
+
   return (
     <div>
       <Header></Header>
       <h2>Videos</h2>
-      {/* Add form components */}
-      <Video videoId={videoId20} />
-      <Video videoId={videoId19} />
-      <Video videoId={videoId18} />
-      <Video videoId={videoId17} />
-      <Video videoId={videoId16} />
-      <Video videoId={videoId15} />
-      <Video videoId={videoId14} />
-      <Video videoId={videoId13} />
-      <Video videoId={videoId12} />
-      <Video videoId={videoId11} />
-      <Video videoId={videoId10} />
-      <Video videoId={videoId9} />
-      <Video videoId={videoId8} />
-      <Video videoId={videoId7} />
-      <Video videoId={videoId6} />
-      <Video videoId={videoId5} />
-      <Video videoId={videoId4} />
-      <Video videoId={videoId3} />
-      <Video videoId={videoId2} />
-      <Video videoId={videoId1} />
+      {videoIds.map((videoId) => (
+        <Video key={videoId} videoId={videoId} />
+      ))}
+      {loading && <div>Loading more videos...</div>}
     </div>
   );
 };
