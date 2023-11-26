@@ -10,7 +10,7 @@ const Video = ({ videoId }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=AIzaSyDu-TE9pqUTFa2GGKB93CeVfMDcnifzZyw`
+          `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=AIzaSyDCWGxkyh7xVk8Cy3ZMwoxeiFuJkEX3RHM`
         );
 
         setVideo(response.data.items[0]);
