@@ -1,14 +1,14 @@
 import Header from "../components/Header";
 
-const AccountCreation = () => {
+const LogIn = () => {
   // Implement the account creation form
   return (
     <div>
       <Header></Header>
-      <h2>Create an Account</h2>
+      <h2>Log In</h2>
       {/* Add form components */}
     </div>
   );
 };
 
-export default AccountCreation;
+export default LogIn;

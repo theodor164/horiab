@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Header from './components/Header';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AccountCreation from './pages/AccountCreation';
 import Home from './pages/Home';
+import LogIn from './pages/LogIn';
+import Videos from './pages/Videos';
 // Import other components and pages
 
 const App = () => {
@@ -9,7 +10,9 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" Component={Home} />
-        <Route path="/account" Component={AccountCreation} />
+        <Route path="/accountCreationPage" Component={AccountCreation} />
+        <Route path="/logInPage" Component={LogIn} />
+        <Route path="/videosPage" Component={Videos} />
         {/* Add routes for other pages */}
       </Routes>
     </Router>

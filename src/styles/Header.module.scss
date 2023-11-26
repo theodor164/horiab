@@ -2,5 +2,16 @@ header {
   background-color: #333;
   color: rgb(255, 255, 255);
   padding: 1rem;
-  text-align: center;
+  text-align: start;
+
+  nav {
+    a {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: red; /* Change to the color you want on hover */
+      }
+    }
+  }
 }
