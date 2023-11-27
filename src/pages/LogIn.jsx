@@ -1,12 +1,17 @@
 import Header from "../components/Header";
 import { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../components/AuthContext';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const LogIn =  ({ history, setIsAuthenticated }) => {
+const LogIn =  () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
+
+  const { login } = useAuth();
+  const navigate = useNavigate(); // useNavigate hook for navigation
 
   const handleChange = (e) => {
     setFormData({
@@ -15,19 +20,18 @@ const LogIn =  ({ history, setIsAuthenticated }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
+      // Make sure to send the login credentials in the request body
       const response = await axios.post('http://localhost:3001/api/login', formData);
 
-      console.log(response.data); // Handle the response as needed
-
-      // For simplicity, let's consider any successful login as authenticated
-      setIsAuthenticated(true);
+      // Assuming the login is successful, call the login function from the AuthContext
+      login();
 
       // Redirect to a protected page (dashboard in this case)
-      history.push('/dashboard');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Login error:', error.response.data.error);
       // Handle the error and show a message to the user
@@ -36,9 +40,10 @@ const LogIn =  ({ history, setIsAuthenticated }) => {
 
   return (
     <div>
+      <Header></Header>
       <h1>Login Page</h1>
-      <form onSubmit={handleSubmit}>
-      <label>
+      <form onSubmit={handleLogin}>
+        <label>
           Username:
           <input type="text" name="username" value={formData.username} onChange={handleChange} />
         </label>
