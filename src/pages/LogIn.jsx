@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import { useState } from 'react';
 import axios from 'axios';
 
-const LogIn = ({ history }) => {
+const LogIn =  ({ history, setIsAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -23,7 +23,10 @@ const LogIn = ({ history }) => {
 
       console.log(response.data); // Handle the response as needed
 
-      // For simplicity, let's redirect to a dashboard page on successful login
+      // For simplicity, let's consider any successful login as authenticated
+      setIsAuthenticated(true);
+
+      // Redirect to a protected page (dashboard in this case)
       history.push('/dashboard');
     } catch (error) {
       console.error('Login error:', error.response.data.error);
@@ -33,10 +36,9 @@ const LogIn = ({ history }) => {
 
   return (
     <div>
-      <Header></Header>
-      <h1>Login</h1>
+      <h1>Login Page</h1>
       <form onSubmit={handleSubmit}>
-        <label>
+      <label>
           Username:
           <input type="text" name="username" value={formData.username} onChange={handleChange} />
         </label>

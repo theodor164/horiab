@@ -9,4 +9,7 @@ export default defineConfig({
       '/api': 'http://localhost:3001', // Adjust the port as needed
     },
   },
+  optimizeDeps: {
+    include: ['react-router-dom'],
+  },
 })
