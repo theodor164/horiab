@@ -5,6 +5,10 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  subscription: {
+    status: { type: Boolean, default: false }, // Subscription status
+    lastBilledAt: { type: Date, default: null }, // Timestamp of the last billing
+  },
   // Add other fields as needed
 });
 

@@ -17,7 +17,10 @@ router.get('/', async (req, res) => {
     // Extract user data
     const userData = {
       username: user.username,
-      // Add other fields as needed
+      subscription: {
+        status: user.subscription.status,
+        lastBilledAt: user.subscription.lastBilledAt,
+      },
     };
     // Return user data including email
     res.json(userData);

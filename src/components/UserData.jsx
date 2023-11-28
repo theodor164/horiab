@@ -25,7 +25,7 @@ const UserData = () => {
       fetchUserData();
     }
   }, [isAuthenticated, username]); // Include username in the dependency array
-
+  console.log(userData);
   // Display user information if authenticated
   return isAuthenticated ? (
     <div>
@@ -33,7 +33,8 @@ const UserData = () => {
       {userData ? (
         <>
           <p>User: {userData.username}</p>
-          {/* Display other user data fields as needed */}
+          <p>Subscription: {userData.subscription.status ? 'Active' : 'Inactive'}</p>
+          <p>Last Billed: {userData.subscription.lastBilledAt}</p>
         </>
       ) : (
         <p>Loading user data...</p>
