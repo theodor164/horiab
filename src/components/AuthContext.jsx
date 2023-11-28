@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState(''); // Set the initial value to an empty string or the default username
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const login = (username) => {
     setIsAuthenticated(true);
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+console.log('hello');
 export const useAuth = () => {
   return useContext(AuthContext);
 };
