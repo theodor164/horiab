@@ -1,5 +1,6 @@
+//LogIn.jsx
 import Header from "../components/Header";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
@@ -10,7 +11,7 @@ const LogIn =  () => {
     password: '',
   });
 
-  const { login } = useAuth();
+  const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate(); // useNavigate hook for navigation
 
   const handleChange = (e) => {
@@ -28,8 +29,8 @@ const LogIn =  () => {
       const response = await axios.post('http://localhost:3001/api/login', formData);
 
       // Assuming the login is successful, call the login function from the AuthContext
-      login();
-
+      login(formData.username);
+     
       // Redirect to a protected page (dashboard in this case)
       navigate('/dashboard');
     } catch (error) {
@@ -37,6 +38,13 @@ const LogIn =  () => {
       // Handle the error and show a message to the user
     }
   };
+
+  useEffect(() => {
+    // If the user is already authenticated, redirect to the dashboard
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div>

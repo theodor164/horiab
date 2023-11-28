@@ -5,17 +5,20 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState(''); // Set the initial value to an empty string or the default username
 
-  const login = () => {
+  const login = (username) => {
     setIsAuthenticated(true);
+    setUsername(username); // Set the actual username when the user logs in
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    setUsername(''); // Reset the username when the user logs out
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, username, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
