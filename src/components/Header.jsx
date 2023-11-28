@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const Header = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, isSubscribed, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -19,6 +19,7 @@ const Header = () => {
         <Link to="/logInPage">Account </Link>
         <Link to="/videosPage">Videos </Link>
         <Link to="/dashboard">Dashboard </Link>
+        {isAuthenticated && isSubscribed && <Link to="/privateVideos">Private Videos </Link>}
         {isAuthenticated && <button onClick={handleLogout}>Logout</button>}
       </nav>
     </header>

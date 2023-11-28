@@ -1,6 +1,7 @@
 // AuthContext.js
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios'; // Import axios
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -8,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState(''); // Set the initial value to an empty string or the default username
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const login = (username) => {
     setIsAuthenticated(true);
@@ -17,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsAuthenticated(false);
     setUsername(''); // Reset the username when the user logs out
+    navigate('/');
   };
 
   const subscribe = () => {
