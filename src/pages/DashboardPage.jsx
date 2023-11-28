@@ -17,6 +17,16 @@ const DashboardPage = () => {
       <h1>Dashboard Page</h1>
       {/* Add content for the dashboard */}
       <UserData></UserData>
+
+       {/* Add the Stripe buy button component */}
+       
+        
+        <stripe-buy-button
+          buy-button-id="buy_btn_1OHT85JtqR3ifyMox1BwbVSq"
+          publishable-key="pk_live_51OHSZJJtqR3ifyMoxZjB2SLvNxAIu8LYfH0eU3mi49U0kI44qkfCLJNlQshyK0OT8KhwvEo36jpXwxp2ayBjxQhG00rENiAOEZ">
+        </stripe-buy-button>
+      
+      
     </div>
   );
 };
